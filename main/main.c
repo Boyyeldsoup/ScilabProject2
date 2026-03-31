@@ -37,32 +37,32 @@ void loop(void)
     switch(input_value) 
     {
         case 'A':
-            mySerial_WriteString("analoog\n");
+            printf("analoog\n");
             break;
         case 'W':
-            mySerial_WriteString("analoog schrijven\n");
+            printf("analoog schrijven\n");
             //handle_analog_write();
             break;
         case 'S':
-            mySerial_WriteString("servo\n");
+            printf("servo\n");
             break;
         case 'G':
-            mySerial_WriteString("MPU6050\n");
+            printf("MPU6050\n");
             break;
         case 'I':
-            mySerial_WriteString("interrupt\n");
+            printf("interrupt\n");
             break;
         case 'E':
-            mySerial_WriteString("encoder\n");
+            printf("encoder\n");
             break;
         case 'C':
-            mySerial_WriteString("counter\n");
+            printf("counter\n");
             break;
         case 'M':
-            mySerial_WriteString("dc motor\n");
+            printf("dc motor\n");
             break;
         case 'R':
-            mySerial_WriteString("analog reference\n");
+            printf("analog reference\n");
             handle_reference();
             break;
 
@@ -93,7 +93,7 @@ void handle_reference(void)
             break;
         
         case '3':
-            mySerial_WriteString("v5\n");
+            mySerial_WriteString("v5");
             break;
         default:
             printf("unknown character\n");
