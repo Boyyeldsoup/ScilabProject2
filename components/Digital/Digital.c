@@ -8,11 +8,10 @@ char Input_output;
 char pinASCII;
 char status;
 char dgv;
-char input_value;
 
 void handle_digital(void)
 {
-
+    char input_value;
     mySerial_Readn(&input_value,1);
     switch(input_value) 
     {
