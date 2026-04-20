@@ -1,0 +1,1 @@
+void handle_analog_read(void);
