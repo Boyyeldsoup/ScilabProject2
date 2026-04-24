@@ -3,6 +3,7 @@
 #include "driver/gpio.h"
 #include "Digital.h"
 #include "AnalogRead.h"
+#include "AnalogWrite.h"
 
 //my functions___________________________________
 void setup(void);
@@ -44,7 +45,7 @@ void loop(void)
             break;
         case 'W':
             printf("analoog schrijven\n");
-            //handle_analog_write();
+            handle_analog_write();
             break;
         case 'S':
             printf("servo\n");
