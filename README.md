@@ -1,0 +1,20 @@
+Onze code voor dit project is eigenlijk structureel hetzelfde opgebouwd als de test.c code voor arduino. Een grote case structure met daarin dan voor elke functie uit de arduino library van scilab een letter. Elke letter die scilab doorstuurt (wanneer een blokje in gebruik is) is dus direct verbonden met de functie die wij hebben geschreven voor de esp32-s3. 
+
+Om de verbinding tussen scilab en onze code te starten moeten we eerst de seriele poort openen met myserial_Setup. 
+
+Nadat de seriele verbinding vastligt gaan we met handle_reference scilab gerust stellen dat het verbonden apparaat een arduino is, ookal is dat niet zo in ons geval. Scilab gaat een "R" doorsturen om handle_reference op te roepen. Vervolgens stuurt scilab ook een 3 door en als het antwoord van onze code dan v5 is dan herkent scilab onze esp32-s3 als een arduino en dus als een apparaat dat kan gebruikt worden om mee samen te werken. 
+
+Vervolgens gaat scilab kijken naar de blokjes die wij op onze xcos hebben gezet en de bijhorende letter doorsturen die onze case structure opvangt en dan ook de bijhorende functie uitvoert. 
+
+Voor ons project waren de meest nuttige functies de analog read en analog write functie. Maar wij zijn begonnen bij digital omdat we toen dachten dat dat makkelijker was om mee te beginnen. 
+
+Digital.c was eigenlijk achteraf gezien meer complex dan analogwrite of analogread. Omdat er nog een case structure nodig was binnen in de functie. We moesten een case hebben die de pin nog eens apart gaat assignen voor digital en meegeeft of het een input of een output is op voorhand. Dat moet niet bij analog read of write. 
+We hadden dit dus iets beter kunnen opdelen voor betere structuur maar omdat dit de eerste code was dat we schreven voor dit project hebben we de structuur van de originele code zo veel mogelijk nagedaan. Scilab stuurt voor een digitaal signaal dus telkens D, a, (nr in ascii), w of r, (nr in ascii). Scilab gebruikt de ascii tabel als manier om pinnen door te sturen dus we moeten ook telkens die code die zij doorsturen interpreteerbaar maken voor onze functies.
+
+Voor analog read geeft scilab een A door en een pinnummer in ascii. Als de ADC nog niet aan staat dan wordt deze aangezet. Indien deze al aan staat niet. Dus als analogread nog eens wordt opgeroepen in dezelfde sessie zal deze niet nog eens moeten opstarten. Dan wordt de channel geconfigureerd met een 12-bit breedte. De ADC-waardes worden dan uitgelezen 64 keer achter elkaar en gedeeld door 64 voor een gemiddelde te hebben bij 64 samples en dat word dan naar scilab gestuurd over de seriele poort. Als de input pin niet een verwachte waarde is dan zal de functie een foutmelding geven.
+
+Voor analog write geeft scilab een W door en een pinnummer in ascii en checkt of de waarde dat scilab doorgeeft logisch is. Dan gaat de functie 1 byte uitlezen van de gegevens die uit de seriele poort komen. De led PWM timer gaat dan geconfigureerd worden. Dan zal de duty cycle toegepast worden op die PWM en dat signaal is dan te zien op de pin die in het begin was meegegeven. 
+
+We hebben dan nog een liksensor en een potentiometer functie toegevoegd in main voor als we een blokje in xcos zelf konden toevoegen. De liksensor zou uitgelezen worden als het zelfgemaakte blokje een L zou sturen met een pinnummer. De potentiometer zou uitgelezen worden als het zelfgemaakte blokje een P zou sturen met een pinnummer.
+
+Alle andere componenten hebben we niet kunnen testen. Die hebben wij ook niet zelf helemaal geschreven. Die zijn vooral door AI gemaakt en zijn dus niet af.
