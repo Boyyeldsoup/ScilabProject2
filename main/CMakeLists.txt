@@ -1,0 +1,4 @@
+idf_component_register(SRCS "main.c"
+                    INCLUDE_DIRS "."
+                    REQUIRES mySerial driver Digital AnalogRead AnalogWrite
+                             Servo InterruptCounter DCMotor Encoder MPU6050)

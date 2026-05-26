@@ -1,0 +1,13 @@
+## IDF Component Manager Manifest File
+## Deze file is voor het binnenhalen van components vanuit andere git repo's.
+## Voorbeeld om bv. myGPIO van de prof binnen te halen:
+##
+## dependencies:
+##   myGPIO:
+##     path: components/myGPIO
+##     git: https://github.com/KNaelaerts/ESP32_Periferie.git
+##
+## Voor nu hebben we alle components lokaal in de components/ map staan,
+## dus geen externe dependencies nodig.
+
+dependencies: {}
